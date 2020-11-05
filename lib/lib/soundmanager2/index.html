@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<style>
+			.rotate{
+				animation-name: rotate;
+				animation-duration: 5s;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+			}
+			@keyframes rotate{
+				from{ transform: rotate(0deg);  }
+				to{ transform: rotate(360deg); }
+			}
+			.play .circular-btn{
+				background-image: url(img/btnPause.png) !important;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="container">
+			<div class="blur"></div>
+			<div class="shadow"></div>
+			<div class="content">
+				<div class="main">
+					<div class="circular center-block">
+						<div class="bg-height"></div>
+						<div class="circular-bg">
+							<div class="circular-img"></div>
+							<div class="circular-btn"></div>
+						</div>
+					</div>
+					<p class="main-text">
+						小说的说法
+					</p>
+				</div>
+
+			</div>
+		</div>
+
+	</body>
+	<script src="js/jquery.js" ></script>
+	<script src="js/soundmanager2.js"></script>
+	<script>
+		soundManager.setup({
+			url: './js/swf/',
+			onready: function() {
+				var mySound = soundManager.createSound({
+					id: 'aSound',
+					url: 'mp3/mp3.mp3'
+				});
+		    
+				$(".circular-bg").click(function(){
+					if(  !$(this).hasClass("play") ){
+						$( this ).addClass("play");
+						$(".circular-img").addClass("rotate")
+						mySound.play({
+							loops: 3
+						});
+					}else{
+						$( this ).removeClass("play")
+						$(".circular-img").removeClass("rotate")
+						mySound.stop();
+					}
+				})
+			}
+		});
+	</script>
+
+	<script>
+	
+	/*
+    function wechatInit() {
+
+        $.ajax({
+            type : "GET",
+            url : "http://api.test.boxfish.cn/wechat/sign",
+            data : {
+                url : location.href
+            },
+            success : function(data) {
+
+                //微信config
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: 'wx3220f6e51ebc19ca', // 必填，公众号的唯一标识
+                    timestamp: data.wechat_sign.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: data.wechat_sign.nonceStr, // 必填，生成签名的随机串
+                    signature: data.wechat_sign.signature,// 必填，签名，见附录1
+                    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+
+                wx.ready(function () {
+
+                    //分享给好友
+                    var shareAppMessageData = {
+                        title: "盒子鱼英语",
+                        desc: "孩子近日的学习战果，就这么拽！",
+                        link: window.location.host + "/learningStatus.html?id="+userId,
+                        imgUrl:userIcon
+                    };
+                    //分享朋友圈
+                    var shareTimelineData = {
+                        title: "孩子近日的学习战果，来点个赞^_^",
+                        desc: "",
+                        link: window.location.host + "/learningStatus.html?id="+userId,
+                        imgUrl:userIcon
+                    };
+                    wx.onMenuShareAppMessage(shareAppMessageData);
+                    wx.onMenuShareTimeline(shareTimelineData);
+
+                });
+
+            }
+        });
+    }
+
+    wechatInit();
+	*/
+	
+	</script>
+
+</html>
